@@ -1,0 +1,1123 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>公益向善设计平台</title>
+    <style>
+        /* 全局动画过渡 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+            background: #f7f7f7;
+            opacity: 0;
+            animation: fadeInPage 0.8s ease forwards;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes fadeInPage {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 深色模式样式 */
+        body.dark-mode {
+            background: #2b2b2b;
+            color: #f2f2f2;
+        }
+
+            body.dark-mode header {
+                background: #3c3c3c;
+            }
+
+            body.dark-mode .banner {
+                background: linear-gradient(to bottom, #3c3c3c, #2b2b2b);
+                color: #e6e6e6;
+            }
+
+            body.dark-mode .filter-btn.active,
+            body.dark-mode .filter-btn:hover {
+                background: #94cfb6;
+                color: #333;
+            }
+
+            body.dark-mode .cta {
+                background: #6ecfa7;
+            }
+
+            body.dark-mode .submit-form,
+            body.dark-mode .community-forum {
+                background: #3c3c3c;
+                color: #f2f2f2;
+            }
+
+                body.dark-mode .submit-form button,
+                body.dark-mode .community-forum button {
+                    background: #94cfb6;
+                    color: #333;
+                }
+
+            body.dark-mode footer {
+                background: #1c5a46;
+            }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 999;
+            transition: background 0.3s ease;
+        }
+
+            header .logo {
+                display: flex;
+                align-items: center;
+                font-weight: bold;
+                font-size: 18px;
+                color: #2a7f62;
+                position: relative;
+                transition: color 0.3s ease;
+            }
+
+                header .logo::before {
+                    content: "";
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle at 30% 30%, #2a7f62, #6ecfa7);
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+
+            header nav ul {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+                header nav ul li a,
+                header nav ul li button {
+                    text-decoration: none;
+                    color: #333;
+                    margin: 0 15px;
+                    font-size: 14px;
+                    transition: color 0.3s ease;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-family: inherit;
+                }
+
+                    header nav ul li a:hover,
+                    header nav ul li button:hover {
+                        color: #2a7f62;
+                    }
+
+        .banner {
+            height: 100vh;
+            background: linear-gradient(to bottom, #88d9bf, #f7f7f7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #2a7f62;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+            .banner h1, .banner p, .banner a.cta {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeUp 1s ease forwards;
+            }
+
+            .banner h1 {
+                animation-delay: 0.2s;
+            }
+
+            .banner p {
+                animation-delay: 0.4s;
+            }
+
+            .banner a.cta {
+                animation-delay: 0.6s;
+            }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .banner a.cta {
+            display: inline-block;
+            background: #2a7f62;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 3px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background .3s ease, transform .3s ease;
+        }
+
+            .banner a.cta:hover {
+                background: #1c5a46;
+                transform: scale(1.05);
+            }
+
+        .banner::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 50% 50%, #fff, #6ecfa7);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .banner::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at bottom left, #2a7f62, #fff);
+            border-radius: 50%;
+            bottom: 10%;
+            right: 15%;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* 鼠标气泡特效 */
+        .bubble {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: bubbleFade 2s forwards;
+        }
+
+        @keyframes bubbleFade {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSection 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInSection {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #works {
+            background: #fff;
+            transition: background 0.3s ease;
+        }
+
+            #works h2 {
+                font-size: 32px;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #2a7f62;
+                opacity: 0;
+                animation: fadeInTitle 0.8s ease forwards;
+            }
+
+        @keyframes fadeInTitle {
+            to {
+                opacity: 1;
+            }
+        }
+
+        #works .intro-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInText 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .filters {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInFilters 0.8s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInFilters {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .filters button {
+            border: none;
+            background: #e0e0e0;
+            margin: 0 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 3px;
+            transition: background .3s ease, transform .3s ease;
+        }
+
+            .filters button.active,
+            .filters button:hover {
+                background: #2a7f62;
+                color: #fff;
+                transform: scale(1.05);
+            }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInWorks 1s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInWorks {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .work-item {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform .3s ease, box-shadow 0.3s ease;
+            min-height: 330px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 15px;
+            z-index: 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+            .work-item:nth-child(1) {
+                animation: fadeUp 0.8s ease forwards;
+                animation-delay: 0.8s;
+            }
+
+            .work-item:nth-child(2) {
+                animation: fadeUp 0.8s ease forwards;
+                animation-delay: 1s;
+            }
+
+            .work-item:nth-child(3) {
+                animation: fadeUp 0.8s ease forwards;
+                animation-delay: 1.2s;
+            }
+
+            .work-item:nth-child(4) {
+                animation: fadeUp 0.8s ease forwards;
+                animation-delay: 1.4s;
+            }
+
+            .work-item:nth-child(5) {
+                animation: fadeUp 0.8s ease forwards;
+                animation-delay: 1.6s;
+            }
+
+            .work-item:nth-child(6) {
+                animation: fadeUp 0.8s ease forwards;
+                animation-delay: 1.8s;
+            }
+
+            .work-item:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            }
+
+        .work-desc h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .work-desc p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .work-tags {
+            font-size: 12px;
+            color: #2a7f62;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .work-tag {
+            background: #eaf5f0;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        /* 分类背景示例 */
+        .work-item[data-category="environment"] {
+            background: #eef8f3;
+        }
+
+        .work-item[data-category="social"] {
+            background: #f9f1e7;
+        }
+
+        .work-item[data-category="care"] {
+            background: #f7eef7;
+        }
+
+        #data {
+            background: #fafafa;
+            animation-delay: 1.5s;
+        }
+
+            #data h2 {
+                font-size: 32px;
+                text-align: center;
+                margin-bottom: 30px;
+                color: #2a7f62;
+                opacity: 0;
+                animation: fadeInTitle 0.8s ease forwards;
+                animation-delay: 1.7s;
+            }
+
+        .data-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInText 0.8s ease forwards;
+            animation-delay: 1.9s;
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .bar {
+            width: 100%;
+            background: #ddd;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+            height: 20px;
+        }
+
+        .bar-fill {
+            height: 20px;
+            background: #2a7f62;
+            width: 0%;
+            transition: width 2s ease, background-color 0.5s ease;
+        }
+
+        .bar-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .trigger-chart {
+            display: inline-block;
+            background: #2a7f62;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background .3s ease, transform .3s ease;
+        }
+
+            .trigger-chart:hover {
+                background: #1c5a46;
+                transform: scale(1.05);
+            }
+
+        #community {
+            position: relative;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+            #community::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(to bottom right, #c9f2e0 0%, #fff 80%);
+                clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0% 100%);
+                z-index: -1;
+                animation: waveMotion 6s ease-in-out infinite alternate;
+            }
+
+        @keyframes waveMotion {
+            0% {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0% 100%);
+            }
+
+            100% {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 95%);
+            }
+        }
+
+        #community h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2a7f62;
+            opacity: 0;
+            animation: fadeInTitle 0.8s ease forwards;
+            animation-delay: 2s;
+        }
+
+        .community-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInText 0.8s ease forwards;
+            animation-delay: 2.2s;
+            position: relative;
+            z-index: 0;
+        }
+
+            .community-content p {
+                margin-bottom: 30px;
+                font-size: 16px;
+                color: #555;
+                line-height: 1.6;
+            }
+
+        .community-forum {
+            text-align: left;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 2.4s;
+            position: relative;
+            z-index: 1;
+        }
+
+            .community-forum::before {
+                content: "";
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background: #2a7f62;
+                border-radius: 50%;
+                top: -15px;
+                left: 20px;
+                box-shadow: 0 0 0 5px #c9f2e0;
+                animation: bubbleFloat 3s ease-in-out infinite;
+            }
+
+        @keyframes bubbleFloat {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .community-forum button {
+            background: #2a7f62;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 14px;
+            transition: background .3s ease, transform .3s ease;
+        }
+
+            .community-forum button:hover {
+                background: #1c5a46;
+                transform: scale(1.05);
+            }
+
+        #submit {
+            background: #f7fdfc;
+            position: relative;
+            overflow: hidden;
+        }
+
+            #submit::before {
+                content: "";
+                position: absolute;
+                top: 50px;
+                right: 30px;
+                width: 80px;
+                height: 80px;
+                background: radial-gradient(circle at 50% 50%, #2a7f62, #fff);
+                border-radius: 50%;
+                opacity: 0.2;
+                animation: dotFloat 4s ease-in-out infinite alternate;
+            }
+
+            #submit::after {
+                content: "";
+                position: absolute;
+                bottom: 50px;
+                left: 20%;
+                width: 120px;
+                height: 120px;
+                background: radial-gradient(circle at 50% 50%, #6ecfa7, #2a7f62);
+                border-radius: 50%;
+                opacity: 0.15;
+                animation: dotFloat2 6s ease-in-out infinite alternate;
+            }
+
+        @keyframes dotFloat {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes dotFloat2 {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(15px);
+            }
+        }
+
+        #submit h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2a7f62;
+            opacity: 0;
+            animation: fadeInTitle 0.8s ease forwards;
+            animation-delay: 2.6s;
+        }
+
+        .submit-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 2.8s;
+        }
+
+            .submit-content p {
+                font-size: 16px;
+                color: #555;
+                margin-bottom: 20px;
+                line-height: 1.6;
+            }
+
+                .submit-content p em {
+                    font-style: normal;
+                    color: #2a7f62;
+                    font-weight: bold;
+                }
+
+        .submit-form {
+            text-align: left;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 3s;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .submit-form:hover {
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            }
+
+            .submit-form input, .submit-form textarea {
+                width: 100%;
+                box-sizing: border-box;
+                margin-bottom: 15px;
+                padding: 10px;
+                font-size: 14px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                transition: box-shadow 0.3s ease;
+            }
+
+                .submit-form input:focus, .submit-form textarea:focus {
+                    box-shadow: 0 0 5px rgba(42,127,98,0.3);
+                    outline: none;
+                }
+
+            .submit-form button {
+                background: #2a7f62;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                border-radius: 3px;
+                font-size: 14px;
+                transition: background .3s ease, transform .3s ease, box-shadow 0.3s ease;
+            }
+
+                .submit-form button:hover {
+                    background: #1c5a46;
+                    transform: scale(1.05);
+                    box-shadow: 0 0 10px rgba(42,127,98,0.3);
+                }
+
+        footer {
+            background: #2a7f62;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeInText 0.8s ease forwards;
+            animation-delay: 3.2s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 链接区域 */
+        #links h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2a7f62;
+            opacity: 0;
+            animation: fadeInTitle 0.8s ease forwards;
+            animation-delay: 2.2s;
+        }
+
+        #links .links-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            opacity: 0;
+            animation: fadeInText 0.8s ease forwards;
+            animation-delay: 2.4s;
+        }
+
+            #links .links-content p {
+                font-size: 16px;
+                color: #555;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            #links .links-content ul {
+                list-style: none;
+                padding: 0;
+                margin: 0 0 20px 0;
+            }
+
+                #links .links-content ul li a {
+                    text-decoration: none;
+                    color: #2a7f62;
+                    transition: color 0.3s ease;
+                }
+
+                    #links .links-content ul li a:hover {
+                        color: #1c5a46;
+                    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">公益设计</div>
+        <nav>
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#works">作品集</a></li>
+                <li><a href="#data">数据与资源</a></li>
+                <li><a href="#community">社区</a></li>
+                <li><a href="#submit">提交作品</a></li>
+                <!-- 增加主题切换按钮 -->
+                <li><button id="theme-toggle">切换主题</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="banner" id="home">
+        <h1>用设计的力量驱动公益与可持续未来</h1>
+        <p>在这里，我们汇集通过创新设计助力社会进步的杰出作品。无论是关爱弱势群体、践行ESG原则还是推动环境保护，设计都能成为解决社会难题的强大工具。让创意与技术引领变革，为世界创造公平、美好、可持续的未来。</p>
+        <a href="#works" class="cta">浏览作品</a>
+    </div>
+
+    <section id="works">
+        <h2>精选公益设计作品</h2>
+        <p class="intro-text">
+            以下作品不仅在美学与创意上有独到之处，更注重在实际应用中的可行性和社会价值。它们紧密契合公益向善的主题，涵盖社会服务、ESG可持续发展与关爱弱势群体等领域。
+            每件作品在创意性、实用性、技术性、审美性和主题契合度五大维度均有优异表现。
+        </p>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="environment">环境保护</button>
+            <button class="filter-btn" data-filter="social">社会服务</button>
+            <button class="filter-btn" data-filter="care">弱势关怀</button>
+        </div>
+        <div class="works-grid">
+            <div class="work-item" data-category="environment">
+                <div class="work-desc">
+                    <h3>城市雨水再利用设计</h3>
+                    <p>
+                        通过巧妙的雨水收集与净化系统，实现城市用水的可持续循环。<br>
+                        创意性：独特水循环结构<br>
+                        实用性：可在多地推广，节约用水成本<br>
+                        技术性：先进过滤材料与智能控制<br>
+                        审美性：自然融入城市景观<br>
+                        主题契合度：直接响应SDG6
+                    </p>
+                    <div class="work-tags">
+                        <span class="work-tag">SDG6</span>
+                        <span class="work-tag">可持续</span>
+                        <span class="work-tag">环境友好</span>
+                    </div>
+                </div>
+            </div>
+            <div class="work-item" data-category="social">
+                <div class="work-desc">
+                    <h3>社区共享图书屋</h3>
+                    <p>
+                        设计可快速搭建的共享书屋，丰富居民精神生活，促进社区融合。<br>
+                        创意性：模块化组装<br>
+                        实用性：低成本易维护<br>
+                        技术性：环保建材与智能借阅系统<br>
+                        审美性：与社区建筑和谐<br>
+                        主题契合度：SDG4
+                    </p>
+                    <div class="work-tags">
+                        <span class="work-tag">SDG4</span>
+                        <span class="work-tag">社会创新</span>
+                        <span class="work-tag">文化共享</span>
+                    </div>
+                </div>
+            </div>
+            <div class="work-item" data-category="care">
+                <div class="work-desc">
+                    <h3>无障碍交互界面</h3>
+                    <p>
+                        为视障、听障用户设计友好、直观的数字产品界面。<br>
+                        创意性：多感官交互<br>
+                        实用性：适配多平台<br>
+                        技术性：语音识别、振动反馈<br>
+                        审美性：简约舒适界面<br>
+                        主题契合度：SDG10
+                    </p>
+                    <div class="work-tags">
+                        <span class="work-tag">SDG10</span>
+                        <span class="work-tag">包容设计</span>
+                        <span class="work-tag">弱势关怀</span>
+                    </div>
+                </div>
+            </div>
+            <div class="work-item" data-category="environment">
+                <div class="work-desc">
+                    <h3>可分解环保包装</h3>
+                    <p>
+                        利用生物降解材料制造包装，从源头减少塑料浪费。<br>
+                        创意性：新型材料<br>
+                        实用性：适应市场多样需求<br>
+                        技术性：可降解聚合物<br>
+                        审美性：自然色调优雅造型<br>
+                        主题契合度：SDG12
+                    </p>
+                    <div class="work-tags">
+                        <span class="work-tag">SDG12</span>
+                        <span class="work-tag">环保材料</span>
+                        <span class="work-tag">零废弃</span>
+                    </div>
+                </div>
+            </div>
+            <div class="work-item" data-category="social">
+                <div class="work-desc">
+                    <h3>社区艺术疗愈计划</h3>
+                    <p>
+                        在社区设立公共艺术工作坊，帮助有心理需求的人群获得情感疏导。<br>
+                        创意性：艺术媒介疗愈<br>
+                        实用性：易于社区推广<br>
+                        技术性：心理学与设计融合<br>
+                        审美性：温暖柔和风格<br>
+                        主题契合度：SDG3
+                    </p>
+                    <div class="work-tags">
+                        <span class="work-tag">SDG3</span>
+                        <span class="work-tag">社会关怀</span>
+                        <span class="work-tag">艺术介入</span>
+                    </div>
+                </div>
+            </div>
+            <div class="work-item" data-category="care">
+                <div class="work-desc">
+                    <h3>灾区临时庇护单元</h3>
+                    <p>
+                        快速搭建的模块化临时居住单元，为灾害中受影响者提供安全居所。<br>
+                        创意性：模块拼装<br>
+                        实用性：快速部署<br>
+                        技术性：轻量可再利用组件<br>
+                        审美性：简洁温馨<br>
+                        主题契合度：SDG11
+                    </p>
+                    <div class="work-tags">
+                        <span class="work-tag">SDG11</span>
+                        <span class="work-tag">人道救援</span>
+                        <span class="work-tag">临时建筑</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="data">
+        <h2>数据与资源</h2>
+        <div class="data-content">
+            <p>
+                公益向善设计的价值不仅在于理念，更在于实证与数据支撑。通过ESG与SDGs指标分析全球案例，我们量化设计成果对环境、社会与经济的影响。点击下方按钮查看动画：
+            </p>
+            <div class="bar-container">
+                <div class="bar-label">净化水资源（60%）- SDG6</div>
+                <div class="bar"><div class="bar-fill" data-width="60%"></div></div>
+                <div class="bar-label">可再生能源增长（80%）- SDG7</div>
+                <div class="bar"><div class="bar-fill" data-width="80%"></div></div>
+                <div class="bar-label">教育资源普及（45%） - SDG4</div>
+                <div class="bar"><div class="bar-fill" data-width="45%"></div></div>
+            </div>
+            <a class="trigger-chart">显示数据可视化</a>
+        </div>
+    </section>
+
+    <section id="community">
+        <h2>社区互动</h2>
+        <div class="community-content">
+            <p>
+                在这里畅所欲言。分享设计创意、交流技术难题或市场推广经验，让彼此的思路碰撞出新的火花，一同探索更好的公益设计之路。
+            </p>
+            <div class="community-forum">
+                <label for="topic">话题</label>
+                <input type="text" id="topic" placeholder="例如：提升社区环保意识的设计策略">
+                <label for="message">留言</label>
+                <textarea id="message" rows="5" placeholder="分享你的想法..."></textarea>
+                <button id="submit-message">提交留言</button>
+                <div id="forum-feedback" style="display:none;margin-top:10px;color:green;font-size:14px;">感谢你的分享！</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="submit">
+        <h2>提交你的公益设计作品</h2>
+        <div class="submit-content">
+            <p>
+                欢迎设计师、学生和创新人士提交你的作品。在提交时，请突出你的设计如何在<em>创意性</em>、<em>实用性</em>、<em>技术性</em>、<em>审美性</em>和<em>主题契合度</em>方面脱颖而出，让你的创意为全球公益事业贡献力量。
+            </p>
+            <div class="submit-form">
+                <label for="work-title">作品名称</label>
+                <input type="text" id="work-title" placeholder="请输入作品名称...">
+                <label for="work-category">作品类别（环境保护/社会服务/弱势关怀）</label>
+                <input type="text" id="work-category" placeholder="例如：环境保护">
+                <label for="work-desc">作品简介（请体现五大评价维度）</label>
+                <textarea id="work-desc" rows="5" placeholder="介绍创意亮点、技术实现、可推广性、美学特征及与公益主题的契合度..."></textarea>
+                <button id="submit-work">提交作品</button>
+                <div id="submit-feedback" style="display:none;margin-top:10px;color:green;font-size:14px;">感谢你的提交！我们将尽快审核。</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="links">
+        <h2>国际与本土环保资源</h2>
+        <div class="links-content">
+            <p>欲了解更多环境保护相关信息，请访问以下国际与国内相关网站：</p>
+            <h3>国际（联合国）环保网站</h3>
+            <ul>
+                <li><a href="https://www.unep.org/" target="_blank">联合国环境规划署（UNEP）</a></li>
+                <li><a href="https://www.un.org/sustainabledevelopment/" target="_blank">联合国可持续发展目标（SDGs）官方网站</a></li>
+            </ul>
+            <h3>中国环境保护相关网站</h3>
+            <ul>
+                <li><a href="https://www.mee.gov.cn/" target="_blank">中华人民共和国生态环境部</a></li>
+                <li><a href="http://www.cepf.org.cn/" target="_blank">中国环境保护基金会</a></li>
+                <li><a href="https://www.cnemc.cn/" target="_blank">中国环境监测总站</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        © 2024 公益向善设计平台 | 设计驱动未来
+    </footer>
+
+    <script>
+        // 作品过滤逻辑
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const workItems = document.querySelectorAll('.work-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-filter');
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                workItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 数据可视化动画
+        const triggerChart = document.querySelector('.trigger-chart');
+        const barFills = document.querySelectorAll('.bar-fill');
+        let chartAnimated = false;
+
+        triggerChart.addEventListener('click', () => {
+            if (!chartAnimated) {
+                barFills.forEach(fill => {
+                    const w = fill.getAttribute('data-width');
+                    fill.style.width = w;
+                });
+                chartAnimated = true;
+            }
+        });
+
+        // 社区提交留言反馈
+        const submitMessageBtn = document.getElementById('submit-message');
+        const forumFeedback = document.getElementById('forum-feedback');
+        submitMessageBtn.addEventListener('click', () => {
+            const topic = document.getElementById('topic').value.trim();
+            const msg = document.getElementById('message').value.trim();
+            if (topic && msg) {
+                forumFeedback.style.display = 'block';
+                setTimeout(() => {
+                    forumFeedback.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // 提交作品反馈
+        const submitWorkBtn = document.getElementById('submit-work');
+        const submitFeedback = document.getElementById('submit-feedback');
+        submitWorkBtn.addEventListener('click', () => {
+            const title = document.getElementById('work-title').value.trim();
+            const cat = document.getElementById('work-category').value.trim();
+            const desc = document.getElementById('work-desc').value.trim();
+            if (title && cat && desc) {
+                submitFeedback.style.display = 'block';
+                setTimeout(() => {
+                    submitFeedback.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // 主题切换
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // 鼠标气泡特效
+        const banner = document.querySelector('.banner');
+        banner.addEventListener('mousemove', (e) => {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.style.top = e.clientY + 'px';
+            bubble.style.left = e.clientX + 'px';
+            document.body.appendChild(bubble);
+            setTimeout(() => {
+                bubble.remove();
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>
